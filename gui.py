@@ -1,4 +1,9 @@
 import tkinter
 from tkinter import *
 
-print("Hello World")
+root = Tk()
+title = root.title("BSCS Student Information System")
+
+root.mainloop()
+
+
