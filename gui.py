@@ -7,7 +7,7 @@ from tkinter import *
 
 root = Tk()
 title = root.title("BSCS CRUD System")
-root.geometry('1000x500')
+root.geometry('840x600')
 
 
 mainLabel = Label(root, text= "Enter Student Information", font=('Ariel', 15))
@@ -26,6 +26,7 @@ firstnameLabel.grid(row=5, column=0)
 middlenameLabel.grid(row=6, column=0)
 courseLabel.grid(row=7, column=0)
 yearLabel.grid(row=8, column=0)
+
 
 
 root.mainloop()
