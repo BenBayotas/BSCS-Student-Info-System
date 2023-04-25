@@ -1,8 +1,6 @@
 import tkinter
 from tkinter import *
 
-
-
 # System GUI--------------------------------------------------------------------------------
 
 root = Tk()
@@ -27,7 +25,6 @@ firstnameLabel.grid(row=5, column=0)
 middlenameLabel.grid(row=6, column=0)
 courseLabel.grid(row=7, column=0)
 yearLabel.grid(row=8, column=0)
-
 
 idEntry = Entry(root, width=40, font=('Ariel', 13))
 lastnameEntry = Entry(root, width=40, font=('Ariel', 13))
