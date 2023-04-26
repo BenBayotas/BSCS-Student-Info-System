@@ -17,7 +17,7 @@ from tkinter import *
 
 root = Tk()
 title = root.title("BSCS CRUD System")
-root.geometry('840x600')
+root.geometry('880x300')
 
 
 mainLabel = Label(root, text= "Enter Student Information", font=('Ariel', 15))
@@ -38,12 +38,12 @@ middlenameLabel.grid(row=6, column=0)
 courseLabel.grid(row=7, column=0)
 yearLabel.grid(row=8, column=0)
 
-idEntry = Entry(root, width=40, font=('Ariel', 13))
-lastnameEntry = Entry(root, width=40, font=('Ariel', 13))
-firstnameEntry = Entry(root, width=40, font=('Ariel', 13))
-middlenameEntry = Entry(root, width=40, font=('Ariel', 13))
-courseEntry = Entry(root, width=40, font=('Ariel', 13))
-yearEntry = Entry(root, width=40, font=('Ariel', 13))
+idEntry = Entry(root, width=33, font=('Ariel', 13))
+lastnameEntry = Entry(root, width=33, font=('Ariel', 13))
+firstnameEntry = Entry(root, width=33, font=('Ariel', 13))
+middlenameEntry = Entry(root, width=33, font=('Ariel', 13))
+courseEntry = Entry(root, width=33, font=('Ariel', 13))
+yearEntry = Entry(root, width=33, font=('Ariel', 13))
 idEntry.grid(row=3, column=1, columnspan=5, padx=5, pady=5)
 lastnameEntry.grid(row=4, column=1, columnspan=5, padx=5, pady=5)
 firstnameEntry.grid(row=5, column=1, columnspan=5, padx=5, pady=5)
@@ -51,5 +51,15 @@ middlenameEntry.grid(row=6, column=1, columnspan=5, padx=5, pady=5)
 courseEntry.grid(row=7, column=1, columnspan=5, padx=5, pady=5)
 yearEntry.grid(row=8, column=1, columnspan=5, padx=5, pady=5)
 
+
+
+addButton = Button(root, text="Add Entry", font=('Ariel', 11), padx=5, pady=5)
+addButton.grid(row=9, column=1)
+
+upButton = Button(root, text="Update Entry", font=('Ariel', 11), padx=5, pady=5)
+upButton.grid(row=9, column=2)
+
+delButton = Button(root, text="Delete Entry", font=('Ariel', 11), padx=5, pady=5)
+delButton.grid(row=9, column=3)
 
 root.mainloop()
