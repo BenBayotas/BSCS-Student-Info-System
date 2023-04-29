@@ -9,14 +9,14 @@ from tkinter import *
 # System GUI--------------------------------------------------------------------------------------------------------------
 root = Tk()
 title = root.title("BSCS CRUD System")
-root.geometry('930x300')
+root.geometry('710x500')
 display = ttk.Treeview(root)
 sms = "Student Management System"
 
 
-mainLabel = Label(root, text= "Enter Student Information", font=('Ariel', 15))
-mainLabel.grid(row=0, column=0, columnspan=25, padx=5, pady=5)
 
+
+''' 
 
 #CRUD Functions------------------------------------------------------------------------------------------------------------
 def reverse(tuples):
@@ -83,64 +83,60 @@ def insert_data():
     for result in reverse(read()):
         display.insert(parent='',index='end',iid=0,text="",values=(result),tag="sms")
 
-    
+'''   
 
 
 
-
-
-
-
-
-
-
+mainLabel = Label(root, text= "BSCS Student Information", font=('Ariel', 15))
+mainLabel.grid(row=0, column=0, columnspan=8, padx=20, pady=20)
 
 
 #Labels-------------------------------------------------------------------------------------------------------------------
-sidLabel = Label(root, text="Student ID", font=('Ariel', 13))
+idLabel = Label(root, text="Student ID", font=('Ariel', 13))
 nameLabel = Label(root, text="Full Name", font=('Ariel', 13))
-ugsuiteLabel = Label(root, text="Urios Gsuite", font=('Ariel', 13))
+gsuiteLabel = Label(root, text="Urios Gsuite", font=('Ariel', 13))
 courseLabel = Label(root, text="Course", font=('Ariel', 13))
 yearLabel = Label(root, text="Year Level", font=('Ariel', 13))
-sidLabel.grid(row=3, column=0)
-nameLabel.grid(row=4, column=0)
-ugsuiteLabel.grid(row=5, column=0)
-courseLabel.grid(row=6, column=0)
-yearLabel.grid(row=7, column=0)
+idLabel.grid(row=1, column=0, padx=3, pady=3)
+nameLabel.grid(row=2, column=0, padx=3, pady=3)
+gsuiteLabel.grid(row=3, column=0, padx=3, pady=3)
+courseLabel.grid(row=4, column=0, padx=3, pady=3)
+yearLabel.grid(row=5, column=0, padx=3, pady=3)
 
 
 #Entry--------------------------------------------------------------------------------------------------------------------
-sidEntry = Entry(root, width=33, font=('Ariel', 13))
+idEntry = Entry(root, width=33, font=('Ariel', 13))
 nameEntry = Entry(root, width=33, font=('Ariel', 13))
-ugsuiteEntry = Entry(root, width=33, font=('Ariel', 13))
+gsuiteEntry = Entry(root, width=33, font=('Ariel', 13))
 courseEntry = Entry(root, width=33, font=('Ariel', 13))
 yearEntry = Entry(root, width=33, font=('Ariel', 13))
-sidEntry.grid(row=3, column=1, columnspan=5, padx=5, pady=5)
-nameEntry.grid(row=4, column=1, columnspan=5, padx=5, pady=5)
-ugsuiteEntry.grid(row=5, column=1, columnspan=5, padx=5, pady=5)
-courseEntry.grid(row=6, column=1, columnspan=5, padx=5, pady=5)
-yearEntry.grid(row=7, column=1, columnspan=5, padx=5, pady=5)
+idEntry.grid(row=1, column=1, padx=3, pady=3)
+nameEntry.grid(row=2, column=1, padx=3, pady=3)
+gsuiteEntry.grid(row=3, column=1, padx=3, pady=3)
+courseEntry.grid(row=4, column=1, padx=3, pady=3)
+yearEntry.grid(row=5, column=1, padx=3, pady=3)
 
 
 #Buttons------------------------------------------------------------------------------------------------------------------
-addButton = Button(root, text="Add Entry", font=('Ariel', 11), padx=5, pady=5)
-addButton.grid(row=9, column=1)
+addButton = Button(root, text="Add Entry", font=('Ariel', 13), bd=3, width=20)
+addButton.grid(row=1, column=2, padx=3, pady=3)
 
-upButton = Button(root, text="Update Entry", font=('Ariel', 11), padx=5, pady=5)
-upButton.grid(row=9, column=2)
+upButton = Button(root, text="Update Entry", font=('Ariel', 13), bd=3, width=20)
+upButton.grid(row=2, column=2, padx=3, pady=3)
 
-delButton = Button(root, text="Delete Entry", font=('Ariel', 11), padx=5, pady=5)
-delButton.grid(row=9, column=3)
+delButton = Button(root, text="Delete Entry", font=('Ariel', 13), bd=3, width=20)
+delButton.grid(row=3, column=2, padx=3, pady=3)
 
 
 #Display Database-------------------------------------------------------------------------------------------------------------
 style=ttk.Style()
 style.configure("Treeview.Heading",font=('Ariel bold',13))
-display['columns']=("Student ID","Full Name","Urios Gsuite","Course","Year Level")
+
+display['columns']=("Student ID", "Full Name", "Urios Gsuite", "Course", "Year Level")
 display.column("#0", width=0,stretch=NO)
 display.column("Student ID", anchor=W,width=100)
-display.column("Full Name", anchor=W,width=100)
-display.column("Urios Gsuite", anchor=W,width=100)
+display.column("Full Name", anchor=W,width=200)
+display.column("Urios Gsuite", anchor=W,width=200)
 display.column("Course", anchor=W,width=100)
 display.column("Year Level", anchor=W,width=100)
 display.heading("Student ID", text="Student ID",anchor=W)
@@ -150,8 +146,8 @@ display.heading("Course", text="Course",anchor=W)
 display.heading("Year Level", text="Year Level",anchor=W)
 
 
-display.tag_configure('sms',background="#EEEEEE",font=('Arial bold', 13))
-display.grid(row=3,column=6,columnspan=8,rowspan=20,padx=10,pady=10)
+display.tag_configure('sms',background="#EEEEEE",font=('Arial bold', 11))
+display.grid(row=6,column=0,columnspan=5,rowspan=20,padx=5,pady=5)
 
 
 
