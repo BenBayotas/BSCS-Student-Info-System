@@ -14,76 +14,105 @@ display = ttk.Treeview(root)
 sms = "Student Management System"
 
 
-
-
-''' 
-
 #CRUD Functions------------------------------------------------------------------------------------------------------------
+
+
+conn = sqlite3.connect('data.db')
+c = conn.cursor()
+
+c.execute(""" CREATE TABLE IF NOT EXISTS stuInfo(
+    stu_Id INTEGER,
+    stu_name TEXT,
+    stu_gsuite TEXT,
+    stu_course TEXT,
+    stu_year INTEGER)""")
+
+
+
+
+def clear():
+    idEntry.delete(0, END)
+    gsuiteEntry.delete(0, END)
+    nameEntry.delete(0, END)
+    courseEntry.delete(0, END)
+    yearEntry.delete(0, END)   
+
+
 def reverse(tuples):
     func_tup = tuples[::-1]
     return func_tup
 
-def insert(sidEntry,nameEntry,ugsuiteEntry,courseEntry,yearEntry):
+
+def insert(id, name, gsuite, course, year):
     conn=sqlite3.connect("data.db")
-    cursor=conn.cursor()
-    cursor.execute("""CREATE TABLE IF NOT EXISTS Student Information(sidEntry TEXT,nameEntry TEXT,ugsuiteEntry TEXT,courseEntry TEXT,yearEntry TEXT)""")
-    cursor.execute("INSERT INTO Student Information VALUES('"+str(sidEntry)+"','"+str(nameEntry)+'","'+str(ugsuiteEntry)+'","'+str(courseEntry)+'","'+str(yearEntry)+"')")
+    c =conn.cursor()
+    c.execute("INSERT INTO stuInfo VALUES('"+str(id)+"','"+str(name)+'","'+str(gsuite)+'","'+str(course)+'","'+str(year)+"')")
+    conn.commit()
+
+
+def update(id, gsuite, name, course, year, idName):
+    conn=sqlite3.connect("data.db")
+    c =conn.cursor()
+    c.execute("UPDATE stuInfo SET stu_Id ='"+str(id)+"', stu_name = '"+str(name)+"', stu_gsuite = '"+str(gsuite)+"',stu_course ='"+str(course)+"', stu_year = '"+str(year)+"' WHERE stu_Id = '" +str(idName)+ "'  ")
     conn.commit()
 
 
 def delete(data):
-    conn = sqlite3.connect("data.db")
-    cursor = conn.cursor()
-    cursor.execute("""CREATE TABLE IF NOT EXISTS Student Information(sidEntry TEXT,nameEntry TEXT,ugsuiteEntry TEXT,courseEntry TEXT,yearEntry TEXT)""")
-    cursor.execute("DELETE FROM Student Information WHERE sidEntry='"+str(data)+"'")
-    conn.commit()
-
-
-def update(sidEntry,nameEntry,ugsuiteEntry,courseEntry,yearEntry):
     conn=sqlite3.connect("data.db")
-    cursor=conn.cursor()
-    cursor.execute("UPDATE Student Information SET StudentID='"+str(sidEntry)+"',FullName='"+str(nameEntry)+"',GsuiteEmail='"+str(ugsuiteEntry)+"',Course='"+str(courseEntry)+"',YearLevel='"+str(yearEntry)+"')")
+    c =conn.cursor()
+    c.execute("DELETE FROM stuInfo WHERE stu_Id = '" +str(data)+ "'  ")
     conn.commit()
+
 
 
 def read():
     conn=sqlite3.connect("data.db")
-    cursor=conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS Student Information(sidEntry TEXT,nameEntry TEXT,ugsuiteEntry TEXT,courseEntry TEXT,yearEntry TEXT)""")
-    cursor.execute("SELECT * FROM Student Information")
-    results=cursor.fetchall()
+    c =conn.cursor()
+    c.execute("SELECT * FROM stuInfo")
+    results= c.fetchall()
     conn.commit()
     return results
 
 
 
-#Inserting Data--------------------------------------------------------------------------------------------------------------
-def insert_data():
-    studentID=str(sidEntry.get())
-    fname=str(nameEntry.get())
-    ugsuite=str(ugsuiteEntry.get())
-    course=str(courseEntry.get())
-    yearlvl=str(yearEntry.get())
-    if studentID == ""or studentID =="":
-        print("Error Inserting Student ID")
-    if fname == ""or fname =="":
-        print("Error Inserting Full Name")
-    if ugsuite == ""or ugsuite =="":
-        print("Error Inserting Urios Gsuite")
-    if course == ""or course =="":
-        print("Error Inserting Course")
-    if yearlvl == ""or yearlvl =="":
-        print("Error Inserting Year Level")
-    else:
-        insert(str(studentID),str(fname),str(ugsuite),str(course),str(yearlvl))
-
+def viewtable():
     for data in display.get_children():
         display.delete(data)
-    
-    for result in reverse(read()):
-        display.insert(parent='',index='end',iid=0,text="",values=(result),tag="sms")
 
-'''   
+    for result in reverse(read()):
+        display.insert(parent='',index='end',iid=result,text="",values=(result),tag="sms")
+
+    display.tag_configure('sms',background="#EEEEEE",font=('Arial bold', 11))
+    display.grid(row=6,column=0,columnspan=5,rowspan=20,padx=5,pady=5)
+
+
+
+#Inserting Data--------------------------------------------------------------------------------------------------------------
+def insert_data():
+    stu_Id = str(idEntry.get())
+    stu_name = str(nameEntry.get())
+    stu_gsuite = str(gsuiteEntry.get())
+    stu_course = str(courseEntry.get())
+    stu_year = str(yearEntry.get())
+    if stu_Id == "" or stu_Id == " ":
+        print("Invalid ID Entry")
+    if stu_name == "" or stu_name == " ":
+        print("Invalid Name Entry")
+    if stu_gsuite == "" or stu_gsuite == " ":
+        print("Invalid Gsuite Entry")
+    if stu_course == "" or stu_course == " ":
+        print("Invalid Course Entry")
+    if stu_year == "" or stu_year == " ":
+        print("Invalid Year Entry")
+    else:
+        insert(str(stu_Id), str(stu_name), str(stu_gsuite), str(stu_course), str(stu_year))
+
+    viewtable()
+    clear()
+    
+    
+
+  
 
 
 
@@ -145,11 +174,10 @@ display.heading("Urios Gsuite", text="Urios Gsuite",anchor=W)
 display.heading("Course", text="Course",anchor=W)
 display.heading("Year Level", text="Year Level",anchor=W)
 
-
-display.tag_configure('sms',background="#EEEEEE",font=('Arial bold', 11))
-display.grid(row=6,column=0,columnspan=5,rowspan=20,padx=5,pady=5)
+viewtable()
 
 
-
+conn.commit()
+conn.close()
 
 root.mainloop()
