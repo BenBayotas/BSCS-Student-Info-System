@@ -69,14 +69,14 @@ def read():
 
 
 def viewtable():
-    for data in my_tree.get_children():
-        my_tree.delete(data)
+    for data in table.get_children():
+        table.delete(data)
 
     for result in reverse(read()):
-        my_tree.insert(parent='', index='end', iid=result, text="", values=(result), tag="orow")   
+        table.insert(parent='', index='end', iid=result, text="", values=(result), tag="orow")   
 
-    my_tree.tag_configure('orow', background='#EEEEEE', font=('Ariel', 11))
-    my_tree.grid(row=6, column=0, columnspan=5, rowspan=10, padx=5, pady=5)
+    table.tag_configure('orow', background='#EEEEEE', font=('Ariel', 11))
+    table.grid(row=6, column=0, columnspan=5, rowspan=10, padx=5, pady=5)
 
 
 
@@ -103,8 +103,8 @@ def add_data():
 
 
 def update_data():
-    selected_entry = my_tree.selection()[0]
-    update_entry = my_tree.item(selected_entry)['values'][0]
+    selected_entry = table.selection()[0]
+    update_entry = table.item(selected_entry)['values'][0]
     update(idEntry.get(), gsuiteEntry.get(), nameEntry.get(), courseEntry.get(), yearEntry.get(), update_entry)
     viewtable()
     clear()
@@ -112,8 +112,8 @@ def update_data():
 
 
 def delete_data():
-    selected_entry = my_tree.selection()[0]
-    delete_entry = str(my_tree.item(selected_entry)['values'][0])   
+    selected_entry = table.selection()[0]
+    delete_entry = str(table.item(selected_entry)['values'][0])   
     delete(delete_entry)
     viewtable()
     clear()
@@ -126,7 +126,7 @@ def delete_data():
 
 root = Tk()
 title = root.title("BSCS CRUD System")
-my_tree = ttk.Treeview(root)
+table = ttk.Treeview(root)
 root.geometry('911x500')
 
 
@@ -170,18 +170,18 @@ delButton.grid(row=3, column=2, padx=3, pady=3)
 style = ttk.Style()
 style.configure("Treeview.Heading", font=('Ariel', 13))
 
-my_tree['columns'] = ("Student ID", "Gsuite", "Name", "Course", "Year")
-my_tree.column("#0", width=0, stretch=NO)
-my_tree.column("Student ID", width=100, anchor=W)
-my_tree.column("Gsuite", width=200, anchor=W)
-my_tree.column("Name", width=200, anchor=W)
-my_tree.column("Course", width=200, anchor=W)
-my_tree.column("Year", width=200, anchor=W)
-my_tree.heading("Student ID", text="Student ID", anchor=W)
-my_tree.heading("Gsuite", text="Gsuite Account", anchor=W)
-my_tree.heading("Name", text="Name", anchor=W)
-my_tree.heading("Course", text="CSP Course", anchor=W)
-my_tree.heading("Year", text="Year Level", anchor=W)
+table['columns'] = ("Student ID", "Gsuite", "Name", "Course", "Year")
+table.column("#0", width=0, stretch=NO)
+table.column("Student ID", width=100, anchor=W)
+table.column("Gsuite", width=200, anchor=W)
+table.column("Name", width=200, anchor=W)
+table.column("Course", width=200, anchor=W)
+table.column("Year", width=200, anchor=W)
+table.heading("Student ID", text="Student ID", anchor=W)
+table.heading("Gsuite", text="Gsuite Account", anchor=W)
+table.heading("Name", text="Name", anchor=W)
+table.heading("Course", text="CSP Course", anchor=W)
+table.heading("Year", text="Year Level", anchor=W)
 
 viewtable()
 
