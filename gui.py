@@ -119,6 +119,19 @@ def delete_data():
     clear()
 
 
+def select_data():
+    selected_entry = table.selection()[0]
+    stu_id = str(table.item(selected_entry)['values'][0])
+    stu_gsuite = str(table.item(selected_entry)['values'][1])
+    stu_name = str(table.item(selected_entry)['values'][2])
+    stu_course = str(table.item(selected_entry)['values'][3])
+    stu_year = str(table.item(selected_entry)['values'][4])
+
+    idEntry.insert(0, str(stu_id))
+    gsuiteEntry.insert(1, str(stu_gsuite))
+    nameEntry.insert(2, str(stu_name))
+    courseEntry.insert(3, str(stu_course))
+    yearEntry.insert(4, str(stu_year))
 
 
 
@@ -166,6 +179,12 @@ upButton.grid(row=2, column=2, padx=3, pady=3)
 
 delButton = Button(root, text="Delete Entry", font=('Ariel', 13), bd=3, width=20, command=delete_data)
 delButton.grid(row=3, column=2, padx=3, pady=3)
+
+selButton = Button(root, text="Select Entry", font=('Ariel', 13), bd=3, width=20, command=select_data)
+selButton.grid(row=4, column=2, padx=3, pady=3)
+
+selButton = Button(root, text="Clear All", font=('Ariel', 13), bd=3, width=20, command=clear)
+selButton.grid(row=5, column=2, padx=3, pady=3)
 
 style = ttk.Style()
 style.configure("Treeview.Heading", font=('Ariel', 13))
