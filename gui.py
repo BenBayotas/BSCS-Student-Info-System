@@ -141,17 +141,17 @@ root = Tk()
 title = root.title("BSCS CRUD System")
 table = ttk.Treeview(root)
 root.geometry('911x500')
+root.configure(bg= 'gray12')
 
-
-mainLabel = Label(root, text= "BSCS Student Information", font=('Ariel', 15))
+mainLabel = Label(root, text= "BSCS Student Information", font=('Ariel', 20),bg= 'gray12',foreground= 'snow')
 mainLabel.grid(row=0, column=0, columnspan=8, padx=20, pady=20)
 
 
-idLabel = Label(root, text="Student ID", font=('Ariel', 13))
-gsuiteLabel = Label(root, text="Gsuite", font=('Ariel', 13))
-nameLabel = Label(root, text="Complete Name", font=('Ariel', 13))
-courseLabel = Label(root, text="Course", font=('Ariel', 13))
-yearLabel = Label(root, text="Year Level", font=('Ariel', 13))
+idLabel = Label(root, text="Student ID", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
+gsuiteLabel = Label(root, text="Gsuite", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
+nameLabel = Label(root, text="Complete Name", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
+courseLabel = Label(root, text="Course", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
+yearLabel = Label(root, text="Year Level", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
 idLabel.grid(row=1, column=0, padx=3, pady=3)
 gsuiteLabel.grid(row=2, column=0, padx=3, pady=3)
 nameLabel.grid(row=3, column=0, padx=3, pady=3)
@@ -170,25 +170,26 @@ nameEntry.grid(row=3, column=1, padx=3, pady=3)
 courseEntry.grid(row=4, column=1, padx=3, pady=3)
 yearEntry.grid(row=5, column=1, padx=3, pady=3)
 
-
-addButton = Button(root, text="Add Entry", font=('Ariel', 13), bd=3, width=20, command=add_data)
+#Buttons-----------------------------------------------------------
+addButton = Button(root, text="Add Entry", font=('Ariel', 13),bg='light gray', bd=3, width=20, command=add_data)
 addButton.grid(row=1, column=2, padx=3, pady=3)
 
-upButton = Button(root, text="Update Entry", font=('Ariel', 13), bd=3, width=20, command=update_data)
+upButton = Button(root, text="Update Entry", font=('Ariel', 13),bg='light gray', bd=3, width=20, command=update_data)
 upButton.grid(row=2, column=2, padx=3, pady=3)
 
-delButton = Button(root, text="Delete Entry", font=('Ariel', 13), bd=3, width=20, command=delete_data)
+delButton = Button(root, text="Delete Entry", font=('Ariel', 13),bg='light gray', bd=3, width=20, command=delete_data)
 delButton.grid(row=3, column=2, padx=3, pady=3)
 
-selButton = Button(root, text="Select Entry", font=('Ariel', 13), bd=3, width=20, command=select_data)
+selButton = Button(root, text="Select Entry", font=('Ariel', 13),bg='light gray', bd=3, width=20, command=select_data)
 selButton.grid(row=4, column=2, padx=3, pady=3)
 
-selButton = Button(root, text="Clear All", font=('Ariel', 13), bd=3, width=20, command=clear)
+selButton = Button(root, text="Clear All", font=('Ariel', 13),bg='light gray', bd=3, width=20, command=clear)
 selButton.grid(row=5, column=2, padx=3, pady=3)
 
 style = ttk.Style()
 style.configure("Treeview.Heading", font=('Ariel', 13))
 
+#Student Table--------------------------------------------------------------------
 table['columns'] = ("Student ID", "Gsuite", "Name", "Course", "Year")
 table.column("#0", width=0, stretch=NO)
 table.column("Student ID", width=100, anchor=W)
@@ -196,6 +197,7 @@ table.column("Gsuite", width=200, anchor=W)
 table.column("Name", width=200, anchor=W)
 table.column("Course", width=200, anchor=W)
 table.column("Year", width=200, anchor=W)
+
 table.heading("Student ID", text="Student ID", anchor=W)
 table.heading("Gsuite", text="Gsuite Account", anchor=W)
 table.heading("Name", text="Name", anchor=W)
