@@ -1,7 +1,9 @@
 import sqlite3
+from statistics import geometric_mean
 import tkinter
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 #CRUD Functions-----------------------------------------------------------------------------
 
@@ -112,11 +114,24 @@ def update_data():
 
 
 def delete_data():
-    selected_entry = table.selection()[0]
-    delete_entry = str(table.item(selected_entry)['values'][0])   
-    delete(delete_entry)
-    viewtable()
-    clear()
+    result = messagebox.askokcancel("Delete Confirmation", "Are you sure you want to delete?")
+    if result:
+        selected_entries = table.selection()
+        if selected_entries:
+            for selected_entry in selected_entries:
+                delete_entry = str(table.item(selected_entry)['values'][0])
+                delete(delete_entry)
+                viewtable()
+                clear()
+        messagebox.showinfo("Delete", "Deleted Successfully!")
+        selected_entry = table.selection()
+        if selected_entry:
+            delete_entry = str(table.item(selected_entry[0])['values'][0])
+            delete(delete_entry)
+            viewtable()
+            clear()
+    else:
+        messagebox.showinfo("Delete", "Deletion Cancelled.")    
 
 
 def select_data():
@@ -142,6 +157,15 @@ title = root.title("BSCS CRUD System")
 table = ttk.Treeview(root)
 root.geometry('911x500')
 root.configure(bg= 'gray12')
+root.resizable(FALSE,FALSE)
+
+window_width = 911
+window_height = 500
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+x = (screen_width - window_width) // 2
+y = (screen_height - window_height) // 2
+root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
 mainLabel = Label(root, text= "BSCS Student Information", font=('Ariel', 20),bg= 'gray12',foreground= 'snow')
 mainLabel.grid(row=0, column=0, columnspan=8, padx=20, pady=20)
@@ -152,11 +176,11 @@ gsuiteLabel = Label(root, text="Gsuite", font=('Ariel', 15),bg= 'gray12',foregro
 nameLabel = Label(root, text="Complete Name", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
 courseLabel = Label(root, text="Course", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
 yearLabel = Label(root, text="Year Level", font=('Ariel', 15),bg= 'gray12',foreground= 'snow',justify='right')
-idLabel.grid(row=1, column=0, padx=3, pady=3)
-gsuiteLabel.grid(row=2, column=0, padx=3, pady=3)
-nameLabel.grid(row=3, column=0, padx=3, pady=3)
-courseLabel.grid(row=4, column=0, padx=3, pady=3)
-yearLabel.grid(row=5, column=0, padx=3, pady=3)
+idLabel.grid(row=1, column=0, padx=3, pady=3, sticky="e")
+gsuiteLabel.grid(row=2, column=0, padx=3, pady=3, sticky="e")
+nameLabel.grid(row=3, column=0, padx=3, pady=3, sticky="e")
+courseLabel.grid(row=4, column=0, padx=3, pady=3, sticky="e")
+yearLabel.grid(row=5, column=0, padx=3, pady=3, sticky="e")
 
 
 idEntry = Entry(root, width=33, font=('Ariel', 13))
