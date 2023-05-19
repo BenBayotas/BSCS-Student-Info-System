@@ -83,6 +83,7 @@ def viewtable():
 
 
 def add_data():
+
     stu_Id = str(idEntry.get())
     stu_gsuite = str(gsuiteEntry.get())
     stu_name = str(nameEntry.get())
@@ -93,24 +94,27 @@ def add_data():
     if stu_gsuite == "" or stu_gsuite == " ":
         print("Invalid Entry")
     if stu_name == "" or stu_name == " ":
-        print("Invalid Entry")
+         print("Invalid Entry")
     if stu_course == "" or stu_course == " ":
         print("Invalid Entry")
     if stu_year == "" or stu_year == " ":
-        print("Invalid Entry")
+            print("Invalid Entry")
     else:
         insert(str(stu_Id), str(stu_gsuite), str(stu_name), str(stu_course), str(stu_year))
-    viewtable()
-    clear()
+        viewtable()
+        clear()
+    
 
 
 def update_data():
-    selected_entry = table.selection()[0]
-    update_entry = table.item(selected_entry)['values'][0]
-    update(idEntry.get(), gsuiteEntry.get(), nameEntry.get(), courseEntry.get(), yearEntry.get(), update_entry)
-    viewtable()
-    clear()
-
+    try:
+        selected_entry = table.selection()[0]
+        update_entry = table.item(selected_entry)['values'][0]
+        update(idEntry.get(), gsuiteEntry.get(), nameEntry.get(), courseEntry.get(), yearEntry.get(), update_entry)
+        viewtable()
+        clear()
+    except:
+        messagebox.showerror("Error", "No Entry Selected")
 
 
 def delete_data():
@@ -135,19 +139,22 @@ def delete_data():
 
 
 def select_data():
-    selected_entry = table.selection()[0]
-    stu_id = str(table.item(selected_entry)['values'][0])
-    stu_gsuite = str(table.item(selected_entry)['values'][1])
-    stu_name = str(table.item(selected_entry)['values'][2])
-    stu_course = str(table.item(selected_entry)['values'][3])
-    stu_year = str(table.item(selected_entry)['values'][4])
 
-    idEntry.insert(0, str(stu_id))
-    gsuiteEntry.insert(1, str(stu_gsuite))
-    nameEntry.insert(2, str(stu_name))
-    courseEntry.insert(3, str(stu_course))
-    yearEntry.insert(4, str(stu_year))
+    try:
+        selected_entry = table.selection()[0]
+        stu_id = str(table.item(selected_entry)['values'][0])
+        stu_gsuite = str(table.item(selected_entry)['values'][1])
+        stu_name = str(table.item(selected_entry)['values'][2])
+        stu_course = str(table.item(selected_entry)['values'][3])
+        stu_year = str(table.item(selected_entry)['values'][4])
 
+        idEntry.insert(0, str(stu_id))
+        gsuiteEntry.insert(1, str(stu_gsuite))
+        nameEntry.insert(2, str(stu_name))
+        courseEntry.insert(3, str(stu_course))
+        yearEntry.insert(4, str(stu_year))
+    except:
+        messagebox.showerror("Error", "No Entry Selected")
 
 
 # System GUI--------------------------------------------------------------------------------
